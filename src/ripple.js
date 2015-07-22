@@ -1,4 +1,12 @@
-(function (window) {
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else {
+        // Browser globals
+        root.Ripple = factory(root.b);
+    }
+}(this, function () {
 
     var Ripple = {},
         observerConfig = {
@@ -120,6 +128,5 @@
         return animation;
     };
 
-    window.Ripple = Ripple;
-
-})(window);
+    return Ripple;
+}));
