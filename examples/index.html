@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ripple effect examples</title>
+	<link rel="stylesheet" type="text/css" href="../dist/style/ripple.css">
+	<style type="text/css">
+		.element-with-ripple {
+			width: 150px;
+			height: 50px;
+			background-color: red;
+			float: left;
+			margin-left: 15px; 
+			margin-bottom: 15px;
+		}
+	</style>
+	<script src="../dist/rippleJS-0.0.1.js"></script>
+	<script type="text/javascript">
+		function onLoad () {
+			Ripple.init(document, {selectors:".element-with-ripple"});
+		}
+
+		function addElement () {
+			var el = document.createElement("div");		
+			el.classList.add('element-with-ripple');
+			document.body.appendChild(el);
+		}
+	</script>
+</head>
+<body onload="onLoad()">
+	<div><button onclick="addElement()">Add</button></div>	
+	<div class="element-with-ripple"></div>
+</body>
+</html>
