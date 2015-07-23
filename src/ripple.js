@@ -75,8 +75,6 @@
         }
     };
 
-
-
     var applyRipple = function (root) {
         var nodes,
             node;
@@ -96,6 +94,7 @@
 
         // set styles on the element        
         node.style.overflow = 'hidden';
+        node.style.position = 'relative';
 
         node.addEventListener('click', function (e) {
             var node = e.currentTarget,
@@ -109,6 +108,12 @@
             if (oldSvg) {
                 oldSvg.remove();
             }
+
+            svg.style.position = 'absolute';
+            svg.style.top = 0;
+            svg.style.left = 0;
+            svg.style.width = '100%';
+            svg.style.height = '100%';
 
             circle.setAttribute('cx', setX);
             circle.setAttribute('cy', setY);
