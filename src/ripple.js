@@ -15,7 +15,7 @@
             attributes: false
         },
         selectors = [],
-        animationDuration = 600;
+        animationDuration = 300;
 
     Ripple.init = function (node, options) {
         var observer = new MutationObserver(mutationsFound);
@@ -37,6 +37,10 @@
                 } else if (typeof options.selectors === 'string') {
                     selectors.push(options.selectors);
                 }
+            }
+
+            if (options.duration) {
+                animationDuration = options.duration;
             }
         }
 
@@ -61,6 +65,7 @@
             node = nodes.item(i);
             if (node instanceof Element) {
                 selectors.forEach(processSelector);
+                applyRipple(node);
             }
         }
     };
@@ -91,8 +96,8 @@
             var x = e.pageX,
                 y = e.pageY,
                 node = e.currentTarget,
-                clickY = y - node.offsetTop,
-                clickX = x - node.offsetLeft,
+                clickY = e.offsetY,
+                clickX = e.offsetX,
                 setX = parseInt(clickX),
                 setY = parseInt(clickY),
                 svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
