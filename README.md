@@ -1,5 +1,5 @@
 # RippleJS
-A simple library for adding ripple effect to orbitary HTML elements.
+A simple library for adding ripple effect to orbitary HTML elements. No external dependencies.
 
 ## Usage
 
