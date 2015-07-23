@@ -4,6 +4,10 @@
 	<title>Ripple effect examples</title>
 	<link rel="stylesheet" type="text/css" href="../dist/style/ripple.css">
 	<style type="text/css">
+
+		.controls {
+			margin-bottom: 15px;
+		}
 		.element-with-ripple {
 			width: 150px;
 			height: 50px;
@@ -16,7 +20,7 @@
 	<script src="../dist/rippleJS-0.0.1.js"></script>
 	<script type="text/javascript">
 		function onLoad () {
-			Ripple.init(document, {selectors:".element-with-ripple", duration: 200});
+			Ripple.init(document, {selectors:".element-with-ripple", duration: 200, color:'#ffffff'});
 		}
 
 		function addElement () {
@@ -27,7 +31,7 @@
 	</script>
 </head>
 <body onload="onLoad()">
-	<div><button onclick="addElement()">Add</button></div>	
+	<div class="controls"><button onclick="addElement()">Add</button></div>	
 	<div class="element-with-ripple"></div>
 </body>
 </html>

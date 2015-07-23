@@ -4,7 +4,7 @@
         define([], factory);
     } else {
         // Browser globals
-        root.Ripple = factory(root.b);
+        root.Ripple = factory();
     }
 }(this, function () {
 
@@ -15,7 +15,8 @@
             attributes: false
         },
         selectors = [],
-        animationDuration = 300;
+        animationDuration = 300,
+        rippleColor = '#ffffff';
 
     Ripple.init = function (node, options) {
         var observer = new MutationObserver(mutationsFound);
@@ -41,6 +42,10 @@
 
             if (options.duration) {
                 animationDuration = options.duration;
+            }
+
+            if (options.color) {
+                rippleColor = options.color;
             }
         }
 
@@ -89,17 +94,13 @@
 
     var applyRippleToElement = function (node) {
 
-        // set styles on the element
-        node.setAttribute('style', 'position:relative');
+        // set styles on the element        
+        node.style.overflow = 'hidden';
 
         node.addEventListener('click', function (e) {
-            var x = e.pageX,
-                y = e.pageY,
-                node = e.currentTarget,
-                clickY = e.offsetY,
-                clickX = e.offsetX,
-                setX = parseInt(clickX),
-                setY = parseInt(clickY),
+            var node = e.currentTarget,
+                setX = parseInt(e.offsetX),
+                setY = parseInt(e.offsetY),
                 svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
                 circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle'),
                 newRadius = Math.sqrt(Math.pow(node.offsetWidth, 2) + Math.pow(node.offsetHeight, 2)).toFixed(2);
@@ -112,6 +113,8 @@
             circle.setAttribute('cx', setX);
             circle.setAttribute('cy', setY);
             circle.setAttribute('r', 0);
+            circle.setAttribute('fill', rippleColor);
+            circle.setAttribute('fill-opacity', 0.4);
 
             svg.appendChild(circle);
 

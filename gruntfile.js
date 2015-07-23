@@ -84,5 +84,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
 
     // Default task.
-    grunt.registerTask('default', ['clean', 'concat', 'jshint', 'uglify', 'sass']);
+    grunt.registerTask('default', ['clean', 'concat', 'jshint', 'uglify']);
 };
