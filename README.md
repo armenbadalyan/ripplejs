@@ -4,8 +4,6 @@ A simple library for adding ripple effect to orbitary HTML elements. No external
 ## Usage
 
 1. Link the library to your project
-
-  `<link rel="stylesheet" type="text/css" href="ripple.css">`
   
   `<script src="rippleJS-0.0.1.js"></script>`
   
@@ -22,8 +20,9 @@ A simple library for adding ripple effect to orbitary HTML elements. No external
 ## Options
 
    `
-        {selectors:<Array|String>,
-       duration:<Number>
+        {selectors: <Array|String>,
+       duration: <Number>,
+       color: <String>
        }
     `
   
@@ -34,6 +33,8 @@ A simple library for adding ripple effect to orbitary HTML elements. No external
   Ripple.init(document, {selectors:".element-with-ripple"});
   Ripple.init(document, {selectors:["a", ".button", ".element-with-ripple"]});
   ```
-  **duration** - Ripple effect duration in milliseconds. Default value is 300.
+  **duration** - Ripple effect duration in milliseconds. The default value is 300.
+  
+  **color** - Color of the ripple effect. The default color is #ffffff.
   
 ## Browser support
