@@ -97,9 +97,11 @@
         node.style.position = 'relative';
 
         node.addEventListener('click', function (e) {
+
             var node = e.currentTarget,
-                setX = parseInt(e.offsetX),
-                setY = parseInt(e.offsetY),
+                localCoord = getLocalEventCoords(e, node),
+                setX = localCoord.x,
+                setY = localCoord.y,
                 svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
                 circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle'),
                 newRadius = Math.sqrt(Math.pow(node.offsetWidth, 2) + Math.pow(node.offsetHeight, 2)).toFixed(2);
@@ -128,6 +130,31 @@
 
             node.appendChild(svg);
         });
+    };
+
+    var getLocalEventCoords = function (event, node) {
+        var rect = node.getBoundingClientRect(),
+            scrollTop = document.documentElement.scrollTop ?
+            document.documentElement.scrollTop : document.body.scrollTop,
+            scrollLeft = document.documentElement.scrollLeft ?
+            document.documentElement.scrollLeft : document.body.scrollLeft,
+            elementLeft = rect.left + scrollLeft,
+            elementTop = rect.top + scrollTop,
+            x,
+            y;
+
+        if (document.all) {
+            x = event.clientX + scrollLeft - elementLeft;
+            y = event.clientY + scrollTop - elementTop;
+        } else {
+            x = event.pageX - elementLeft;
+            y = event.pageY - elementTop;
+        }
+
+        return {
+            x: x,
+            y: y
+        };
     };
 
     var createAnimation = function (attribute, dur, to, fill) {
