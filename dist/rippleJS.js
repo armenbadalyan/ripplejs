@@ -106,33 +106,41 @@
                 localCoord = getLocalEventCoords(e, node),
                 setX = localCoord.x,
                 setY = localCoord.y,
-                svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
-                circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle'),
-                newRadius = Math.sqrt(Math.pow(node.offsetWidth, 2) + Math.pow(node.offsetHeight, 2)).toFixed(2);
+                svg = node.querySelector('svg'),
+                newRadius = Math.sqrt(Math.pow(node.offsetWidth, 2) + Math.pow(node.offsetHeight, 2)).toFixed(2),
+                circle;
 
-            var oldSvg = node.querySelector('svg');
-            if (oldSvg) {
-                oldSvg.remove();
+            
+            if (!svg) {
+                svg =document.createElementNS('http://www.w3.org/2000/svg', 'svg');                
+                circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                
+                svg.style.position = 'absolute';
+                svg.style.top = 0;
+                svg.style.left = 0;
+                svg.style.width = '100%';
+                svg.style.height = '100%';
+
+                svg.appendChild(circle);
+
+                circle.appendChild(createAnimation('r', animationDuration + 'ms', newRadius, 'freeze'));
+                circle.appendChild(createAnimation('fill-opacity', (animationDuration + 400) + 'ms', 0, 'freeze'));
+
+                node.appendChild(svg);
             }
+            else {
+                circle = svg.querySelector('circle');
 
-            svg.style.position = 'absolute';
-            svg.style.top = 0;
-            svg.style.left = 0;
-            svg.style.width = '100%';
-            svg.style.height = '100%';
+            }
 
             circle.setAttribute('cx', setX);
             circle.setAttribute('cy', setY);
             circle.setAttribute('r', 0);
             circle.setAttribute('fill', rippleColor);
-            circle.setAttribute('fill-opacity', 0.4);
+            circle.setAttribute('fill-opacity', 0.4);        
 
-            svg.appendChild(circle);
+            runAnimations(circle.querySelectorAll('animate'));            
 
-            circle.appendChild(createAnimation('r', animationDuration + 'ms', newRadius, 'freeze'));
-            circle.appendChild(createAnimation('fill-opacity', (animationDuration + 400) + 'ms', 0, 'freeze'));
-
-            node.appendChild(svg);
         });
     };
 
@@ -168,8 +176,16 @@
         animation.setAttribute('dur', dur);
         animation.setAttribute('to', to);
         animation.setAttribute('fill', fill);
+        animation.setAttribute('begin', 'indefinite');
 
         return animation;
+    };
+
+    var runAnimations = function (animations) {
+        var animation;
+        for(var i = 0; i < animations.length; i++) {
+            animations.item(i).beginElement();
+        }
     };
 
     return Ripple;
