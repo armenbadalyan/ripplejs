@@ -5,7 +5,7 @@ A simple library for adding ripple effect to orbitary HTML elements. No external
 
 1. Link the library to your project
   
-  `<script src="rippleJS-0.0.1.js"></script>`
+  `<script src="rippleJS.js"></script>`
   
   AMD is also supported
   
