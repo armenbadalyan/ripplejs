@@ -16,11 +16,12 @@ module.exports = function (grunt) {
         ],
         sass: ['sass/'],
         pkg: pkg,
-        uglifyFiles: {}
+        uglifyFiles: {},
+        jsBanner: '/** \n * <%= pkg.name %> \n * Version <%= pkg.version %> \n */'
     };
 
     // setup dynamic filenames
-    config.versioned = [config.pkg.name, config.pkg.version].join('-');
+    config.versioned = config.pkg.name;
     config.dist = ['dist/', '.js'].join(config.versioned);
     config.uglifyFiles[['dist/', '.min.js'].join(config.versioned)] = config.dist;
 
@@ -72,6 +73,18 @@ module.exports = function (grunt) {
                     ext: '.css'
                 }]
             }
+        },
+        usebanner: {
+
+            options: {
+                position: 'top',
+                banner: config.jsBanner,
+                linebreak: true
+            },
+            files: {
+                src: ['dist/*.js']
+            }
+
         }
     });
 
@@ -82,7 +95,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-banner');
 
     // Default task.
-    grunt.registerTask('default', ['clean', 'concat', 'jshint', 'uglify']);
+    grunt.registerTask('default', ['clean', 'concat', 'jshint', 'uglify', 'usebanner']);
 };
