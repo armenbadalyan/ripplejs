@@ -1,7 +1,7 @@
 # RippleJS
 A simple library for adding ripple effect to arbitrary HTML elements as seen in Google's Material Design. Has no dependencies.
 
-[Demo](https://github.com/armenbadalyan/ripplejs/edit/master/README.md)
+[Demo](http://htmlpreview.github.io/?https://raw.githubusercontent.com/armenbadalyan/ripplejs/master/examples/index.html)
 
 ## Usage
 
