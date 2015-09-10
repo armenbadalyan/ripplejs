@@ -40,3 +40,5 @@ A simple library for adding ripple effect to arbitrary HTML elements as seen in 
   **color** - Color of the ripple effect. The default color is #ffffff.
   
 ## Browser support
+
+Chrome, Safari, Firefox, Safari on iOS, Chrome on Android
