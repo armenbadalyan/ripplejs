@@ -92,9 +92,13 @@
 
     var applyRippleToElement = function (node) {
 
+        var position = getComputedStyle(node).getPropertyValue('position');
+
         // set styles on the element        
         node.style.overflow = 'hidden';
-        node.style.position = 'relative';
+        if (position === 'static') {
+            node.style.position = 'relative';
+        }
 
         node.addEventListener('click', function (e) {
 
@@ -106,11 +110,11 @@
                 newRadius = Math.sqrt(Math.pow(node.offsetWidth, 2) + Math.pow(node.offsetHeight, 2)).toFixed(2),
                 circle;
 
-            
+
             if (!svg) {
-                svg =document.createElementNS('http://www.w3.org/2000/svg', 'svg');                
+                svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                 circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                
+
                 svg.style.position = 'absolute';
                 svg.style.top = 0;
                 svg.style.left = 0;
@@ -123,8 +127,7 @@
                 circle.appendChild(createAnimation('fill-opacity', (animationDuration + 400) + 'ms', 0, 'freeze'));
 
                 node.appendChild(svg);
-            }
-            else {
+            } else {
                 circle = svg.querySelector('circle');
 
             }
@@ -133,9 +136,9 @@
             circle.setAttribute('cy', setY);
             circle.setAttribute('r', 0);
             circle.setAttribute('fill', rippleColor);
-            circle.setAttribute('fill-opacity', 0.4);        
+            circle.setAttribute('fill-opacity', 0.4);
 
-            runAnimations(circle.querySelectorAll('animate'));            
+            runAnimations(circle.querySelectorAll('animate'));
 
         });
     };
@@ -179,7 +182,7 @@
 
     var runAnimations = function (animations) {
         var animation;
-        for(var i = 0; i < animations.length; i++) {
+        for (var i = 0; i < animations.length; i++) {
             animations.item(i).beginElement();
         }
     };
