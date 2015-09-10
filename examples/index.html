@@ -7,14 +7,42 @@
 		.controls {
 			margin-bottom: 15px;
 		}
-		.element-with-ripple {
-			width: 150px;
-			height: 50px;
-			background-color: red;
-			float: left;
-			margin-left: 15px; 
-			margin-bottom: 15px;
+		.element-with-ripple {	
+			width: 150px;				
+			background-color: #5181F4;			
+			padding: 10px;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			color: white;
 		}
+
+		.button-wrapper {
+			padding-top: 10px;
+			margin-bottom: 20px;
+		}
+
+		.relative {
+			position: relative;
+		}
+
+		.absolute {
+			position: absolute;
+			left: 200px;
+			top: 50px;
+		}
+
+		.inline {
+			display: inline;
+		}
+
+		.round {
+			display: inline-block;			
+			width: 50px;
+			height: 50px;
+			border-radius: 50px;
+			
+		}
+		
 	</style>
 	<script src="../dist/rippleJS.js"></script>
 	<script type="text/javascript">
@@ -25,6 +53,7 @@
 		function addElement () {
 			var el = document.createElement("div");		
 			el.classList.add('element-with-ripple');
+			el.textContent = "Dynamic button";
 			document.body.appendChild(el);
 		}
 	</script>
@@ -32,5 +61,12 @@
 <body onload="onLoad()">
 	<div class="controls"><button onclick="addElement()">Add</button></div>	
 	<div class="element-with-ripple">Button</div>
+	<div class="element-with-ripple relative">Relative button</div>
+	<div class="element-with-ripple absolute">Absolute button</div>
+	<div class="button-wrapper">
+		<div class="element-with-ripple inline">Inline button</div>	
+	</div>		
+	<div class="element-with-ripple round"></div>	
+	
 </body>
 </html>
